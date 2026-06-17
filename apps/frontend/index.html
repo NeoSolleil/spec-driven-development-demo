@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>あいさつ画面</title>
+</head>
+<body>
+  <h1>多言語あいさつ</h1>
+
+  <button data-number="2">日本語</button>
+  <button data-number="1">英語</button>
+
+  <p>あいさつ: <span id="greeting"></span></p>
+
+  <h2>履歴</h2>
+  <ul id="history"></ul>
+
+  <script>
+    // BEのAPIを叩く（ロジックはBEに一本化。FEは呼ぶだけ）
+    const API = "http://localhost:5001";
+
+    async function greet(number) {
+      // POST /greet であいさつを取得
+      const res = await fetch(`${API}/greet`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ number })
+      });
+      const data = await res.json();
+      document.getElementById("greeting").textContent = data.message;
+      await renderHistory();
+    }
+
+    async function renderHistory() {
+      // GET /history で履歴を取得して描画
+      const res = await fetch(`${API}/history`);
+      const data = await res.json();
+      const ul = document.getElementById("history");
+      ul.innerHTML = "";
+      data.history.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+    }
+
+    document.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => greet(Number(btn.dataset.number)));
+    });
+  </script>
+</body>
+</html>
