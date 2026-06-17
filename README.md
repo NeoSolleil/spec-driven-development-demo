@@ -1,5 +1,16 @@
 # Hello World SDD デモ（モノレポ / BE + FE）
 
+## 関連記事
+
+このリポジトリは、以下のQiita記事のサンプルコードです。
+
+- 📘 **概念編**：[TDD・BDD・DDD…結局どれ？ AI時代の答えとしての Spec-Driven Development](https://qiita.com/NeoSoleil/items/82259a79885327b11b49)
+  「仕様」と「振る舞い」の違い、TDD/BDD/DDDとSDDの関係を整理
+- 🛠 **実践編**：[SDDを手で動かす：BE/FE分離のモノレポを仕様→実装→検証で一周する](https://qiita.com/NeoSoleil/items/c8d48fdd13e38186c1e0)
+  このコードを題材に、仕様→実装→検証を BE/FE分離で一周する
+
+---
+
 仕様(spec) → 振る舞い(Gherkin) → 実装 → 検証 の流れを、
 backend / frontend に分けて体験する最小セット。
 Gherkinは「設計・AIへの指示書」。テストは実ツール（pytest / Playwright）で書く。
